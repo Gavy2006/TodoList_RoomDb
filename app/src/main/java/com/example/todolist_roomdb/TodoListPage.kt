@@ -1,5 +1,6 @@
 package com.example.todolist_roomdb
 
+import TodoViewModel
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
@@ -55,7 +56,7 @@ fun TodoListPage(todoViewModel: TodoViewModel ){
                            Text(item.date.toString())
                        }
 
-                       IconButton(onClick = {todoViewModel.deleteTodo(item.int)}) {
+                       IconButton(onClick = {todoViewModel.deleteTodo(item.id)}) {
 
                            Icon(painter = painterResource(R.drawable.baseline_delete_24) , contentDescription = "")
                        }

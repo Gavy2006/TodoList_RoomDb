@@ -20,6 +20,6 @@ object TodoManager {
     }
 
     fun deleteTodo(id : Int){
-        list.removeIf { it.int == id }
+        list.removeIf { it.id == id }
     }
 }

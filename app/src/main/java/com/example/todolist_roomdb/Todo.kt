@@ -1,9 +1,16 @@
 package com.example.todolist_roomdb
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.Date
 
-data class Todo(
+@Entity(tableName = "todo")
+data class Todo (
+
     var title : String ,
-    var int : Int ,
+
+    @PrimaryKey(autoGenerate = true)
+    var id : Int = 0 ,
+
     var date : Date
 )

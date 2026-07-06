@@ -1,31 +1,32 @@
-package com.example.todolist_roomdb
-
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.todolist_roomdb.MainApplication
+import com.example.todolist_roomdb.Todo
+import kotlinx.coroutines.launch
 import java.util.Date
 
 class TodoViewModel : ViewModel() {
 
-    private var _todolist = MutableLiveData<List<Todo>>()
-    val todolist : LiveData<List<Todo>> = _todolist
+    private val todoDao = MainApplication.tododb.gettodoDao()
 
-    fun getAllTodo(){
-        _todolist.value = TodoManager.getAllTodo()
+    val todolist = todoDao.getAllTodo()
+
+    fun addTodo(text: String) {
+
+        viewModelScope.launch {
+            todoDao.addTodo(
+                Todo(
+                    title = text,
+                    date = Date()
+                )
+            )
+        }
     }
 
+    fun deleteTodo(id: Int) {
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun addTodo(text : String){
-
-        TodoManager.addTodo(text)
-        getAllTodo()
-    }
-
-    fun deleteTodo(id : Int){
-        TodoManager.deleteTodo(id)
-        getAllTodo()
+        viewModelScope.launch {
+            todoDao.deleteTodo(id)
+        }
     }
 }
