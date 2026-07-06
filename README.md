@@ -51,7 +51,8 @@ Entity (Todo)
 
 ## 📸 Architecture
 
-Add the architecture image below.
+
+![Architecture](Architecture.jpeg)
 
 ---
 
